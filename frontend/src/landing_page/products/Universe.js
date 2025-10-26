@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 function Universe() {
   return (
@@ -33,12 +35,10 @@ function Universe() {
           <img src="media/images/smallcaseLogo.png" />
           <p className="text-muted fs-6 mt-3">Personalized advice on life</p>
         </div>
-        <button
-          className="p-2 fs-5 btn btn-primary mt-3"
-          style={{ width: "20%", margin: "0 auto" }}
-        >
-          Sign up Now
-        </button>
+        <Link class="nav-link active" aria-current="page" to="/signup">
+                                <button className='p-2 fs-5 btn btn-primary' style={{width:"20%" ,margin:"0 auto"}}>Sign up Now</button>
+
+              </Link>
       </div>
     </div>
   );

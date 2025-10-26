@@ -1,6 +1,8 @@
 // frontend/src/Signup.jsx
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 export default function Signup() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -56,10 +58,19 @@ export default function Signup() {
             required
           />
           <button type="submit" style={styles.button}>Sign up</button>
+           {/* LOGIN BUTTON */}
+        <p style={{ marginTop: "15px" }}>
+          Already have an account?{" "}
+          <Link to="/login" style={styles.link}>
+            Login
+          </Link>
+        </p>
         </form>
       </div>
       <p>{msg}</p>
+      
     </div>
+    
   );
 }
 

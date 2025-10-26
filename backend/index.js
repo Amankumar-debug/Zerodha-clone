@@ -17,7 +17,7 @@ const jwt = require("jsonwebtoken");
 const PORT=process.env.PORT || 3002;
 const URL =process.env.MONGO_URL;
 
-app.use(cors({ origin: ["http://localhost:3000","http://localhost:3001"] }));
+app.use(cors({ origin: ["https://zerodha-clone-frontend-qzdr.onrender.com","https://zerodha-clone-1-rh8f.onrender.com"] }));
 app.use(bodyparser.json());
 main()
 .then(()=>{

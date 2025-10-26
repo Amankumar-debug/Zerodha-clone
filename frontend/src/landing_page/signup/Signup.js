@@ -14,11 +14,11 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3002/api/signup", form);
+      const res = await axios.post("https://zerodha-clone-d8et.onrender.com/api/signup", form);
       localStorage.setItem("token", res.data.token);
 
       // Redirect to dashboard
-      window.location.href = "http://localhost:3001"; // dashboard URL
+      window.location.href ="https://zerodha-clone-1-rh8f.onrender.com"; // dashboard URL
     } catch (err) {
       setMsg(err.response?.data?.msg || "Error signing up");
     }

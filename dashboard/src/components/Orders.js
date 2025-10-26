@@ -19,7 +19,7 @@ const Orders = () => {
 
   const [allPositions,setAllPositions]=useState([]);
     useEffect(()=>{
-      axios.get("http://localhost:3002/allOrders").then((res)=>{
+      axios.get("https://zerodha-clone-d8et.onrender.com/allOrders").then((res)=>{
         setAllPositions(res.data)
       });
     },[])

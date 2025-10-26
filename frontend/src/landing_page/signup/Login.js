@@ -9,12 +9,12 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3002/api/login", {
+      const res = await axios.post("https://zerodha-clone-d8et.onrender.com/api/login", {
         email,
         password,
       });
       localStorage.setItem("token", res.data.token);
-      window.location.href = "http://localhost:3001"; // redirect to dashboard
+      window.location.href = "https://zerodha-clone-1-rh8f.onrender.com"; // redirect to dashboard
     } catch (err) {
       console.error(err.response?.data?.message || err.message);
       setError(err.response?.data?.message || "Login failed");

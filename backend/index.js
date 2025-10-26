@@ -5,14 +5,19 @@ const mongoose= require("mongoose");
 const Holdings=require("./models/holdings")
 const Positions=require("./models/positions")
 const  OrdersModel=require("./models/orders")
+const User=require("./models/user")
 const cors=require("cors");
 const bodyparser =require("body-parser");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+
 
 
 const PORT=process.env.PORT || 3002;
 const URL =process.env.MONGO_URL;
 
-app.use(cors());
+app.use(cors({ origin: ["http://localhost:3000","http://localhost:3001"] }));
 app.use(bodyparser.json());
 main()
 .then(()=>{
@@ -97,6 +102,30 @@ app.get("/allOrders", async(req,res)=>{
     res.json(allOrders);
 }
 )
+
+app.post("/api/signup", async (req, res) => {
+  const { username, email, password } = req.body;
+
+  if (!username || !email || !password) {
+    return res.status(400).json({ msg: "All fields are required" });
+  }
+
+  try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) return res.status(400).json({ msg: "Email already exists" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ username, email, password: hashedPassword });
+    await newUser.save();
+
+    const token = jwt.sign({ id: newUser._id, username }, "simplejwtsecret", { expiresIn: "1d" });
+
+    res.json({ token, user: { id: newUser._id, username, email } });
+  } catch (err) {
+    console.error("Signup error:", err); // <--- this will show exact error
+    res.status(500).json({ msg: "Server error" });
+  }
+});
 
 
 app.listen(PORT,()=>{
